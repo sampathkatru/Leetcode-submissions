@@ -1,15 +1,19 @@
 class Solution {
 public:
     int maximum69Number (int num) {
-        string n=to_string(num);
-        for(int i=0;i<n.size();i++)
+        int rightCountDigit = -1;
+        int digitCount = 0;
+        int temp = num;
+
+        while(temp > 0)
         {
-            if(n[i]=='6') 
-            {
-                n[i]='9';
-                break;
-            }
+            int dig = temp % 10;
+            if(dig == 6) rightCountDigit = digitCount;
+            digitCount++;
+            temp /= 10;
         }
-        return stoi(n);
+        if(rightCountDigit == -1) return num;
+        int ans = num + 3 * static_cast<int>(pow(10, rightCountDigit));
+        return ans;
     }
 };
